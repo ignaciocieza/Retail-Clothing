@@ -1,0 +1,186 @@
+------
+Links:
+------
+	
+	https://devcenter.heroku.com/articles/heroku-cli
+
+	http://getbem.com/  //-> convencions para nombrar css
+
+	https://www.styled-components.com/ //(*notas)  
+
+
+---------
+Comandos:
+---------
+0) npx create-react-app "nombre"
+
+1) yarn add node-sass react-router-dom firebase
+
+2) yarn add react-redux redux redux-thunk
+
+3) yarn add reselect
+
+4) yarn add redux-persist
+
+5) yarn add react-stripe-checkout
+
+6) yarn add styled-components // (*notas)
+
+7) yarn add redux-saga
+
+8) yarn add axios
+
+
+-----
+APIs:
+----
+
+firebase: para logear usuario.
+
+stripe: plataforma para pago
+
+heroku: servidor
+
+	Cli: https://devcenter.heroku.com/articles/heroku-cli (windows 64, como para node)
+
+	Comandos:
+		
+		0) antes de hacer estos pasos debe haber repositorio .git
+
+		1) heroku login
+
+			//Genera, en base a una biblioteca para react, el buildpack para el servidor, 
+			//lo genera en un repositorio remoto en heroku
+
+		2) heroku create e-commerce-live --buildpack https://github.com/mars/create-react-app-buildpack.git
+													
+			//Sube el repositorio creado a heroku, optimiza el codigo, lo comprime y lo sube al servidor
+
+		3) git push heroku master
+
+			// se obtiene un link a heroku :  https://commerce-server-live.herokuapp.com/
+
+					nota: 	agregar este link en: firebase -> autenticacion -> agregar dominio,
+							para que se pueda acceder desde el servidor
+
+							en caso de modificarse solamente la aplicacion sin los nodes-modules
+							Solo hacer pasos 0 y 3. !!!!!
+
+--------
+Notas:
+--------
+
+*) 	Los 3 puntos (...), tienen 3 funciones:
+		
+	1)Rest: contraen todos los valores de las varialbes en un array (bajo un mismo nombre).
+	2)Spread: Expande todos los valores de un array ( de un nombre), generando por cada indice una variable.
+	3)Spread and Append: ademas del 2), agrega un nuevo valor al final de la lista. 
+
+*) 	Desestruct de obj y de array: 
+		obj:	Forma de separar las variables de un objeto, sin tener que declarlas previamente.
+				cada una de estas varaibales, tienen que tener el mismo nombre que las que estan en el obj
+				ej: const { name, imageUrl, price, quantity } = cartItem;
+		array:  Las variables se separan en base al orden, o sea, al indice. 
+				No tiene que tener el mismo nombre.
+				ej: const a= [1,2,3];
+					cosnt [primero, segundo, tercer] = a;
+
+*) Interpolation: `${match.path}`.
+
+*)class: 
+		class: propiedades, son variables que no se le definen el tipo (const/let) debido al azucar sintactico.  
+    	No pueden ser seteadas como varibles, porque se encuentra dentro de una clase.
+    	Las variables solo pueden ser seteadas dentro de funciones.  
+
+*) 	Patrones: son metodos o manera de hacer algo que se repite. 
+
+*)	Reduce: funcion con dos parametro que obtiene un valor de un array. 1arg, callback. 2do, el valor inicial del acumulador.
+    1arg (callback), tiene tmb dos parametro. El primero es el acumulador y el segundo el primer elemento del array (dependiendo del 2do arg).
+
+*) Reselect: Memoization  ---> es un cach o almacenamiento de una solucion a un determinado problema, para que en caso de que exista no se vuelva 
+				a buscar la solucion a ese problema. Es un closure, para seleccionar una parte del store y aplicaciones que conetangan mucha info.
+			Tipos de Selectores: 1)Input Selector-> no usa createSelector
+								 2)OutPut Selector-> usa createSelector. Toma una parte del obj para "Memoization" 
+			Se usa: createStructuredSelector(), para pasar el "state" a los selectores.
+					createSelector(), para recibir el "state" de los selectores. 
+	
+	Lo que hace el selector es traer una parte del store (la que se vaya a usar),
+ 	en vez de traer todo el store. De manera que se aumenta la performance.
+ 	Ademas dentro de estos selectores, se pueden realizar otras operaciones,
+	aprovechando las ventajas del closure.
+
+*) 	Persist: 	utiliza metodos como localstorage o session. 
+				Se coloca en "store" , "indexReducer" y "index.js"
+
+*) Curried Function : "currificar"
+	En la ciencia de la computación, currificar es la técnica inventada por Moses Schönfinkel y Gottlob Frege
+	 que consiste en transformar una función que utiliza múltiples argumentos 
+	 (o más específicamente una n-tupla como argumento) 
+	 en una secuencia de funciones que utilizan un único argumento. 
+	 (Eso es la operación inversa a la composición de funciones en matemáticas).
+	 -> Ver video en apendice.
+
+*)Normalization: 
+	Es dar un formato especial a la informacion para que se acceda mas rapido.
+	Se accede mas rapido a un objeto que a un array. 
+	Ej. Pasar array a formato JSON (objeto que contiene un arraya de objetos, ej: collections[collectionUrlParam] ) 
+
+*)Styled-Components:    css para components. Da una clave unica para cada className, 
+						para que no se se cruce con otra clase como puede pasar en css o sass.
+
+*)BackEnd:  
+	
+	Firebase:	
+			Es una base de datos NoSql.
+			Los pedidos a la base de datos, que devuelve un Documento o una Colleccion. 
+			Cada uno puede ser una referencia o un snapshot de estos objetos.
+		
+		Query-reference: 	firestore.doc('/user/:userId') [documentRef]
+										|_para realizar metodos CRUD (set, get,update,delete)
+							firestore.collections('/user') [collectionRef]
+										|_metodo: add() -> add un documento a una collection.
+		Query-snapshot:		se obtiene de usar el metodo get():
+								|_ documentRef ->return: documentSnapshot object
+								|_collectionRef ->return: collectionSnapshot object
+							El objeto obtenido, permite determinar la existancia del documento solicitado.
+		snapshot: 	es como un objeto de prueba, que no modifica nada en la base de datos.
+					es decir que corre dentro de node-modules, solamente.
+	
+	Node: ../info.txt
+
+*)Thunk:
+	se activa cuando se usa "dispatch" como funcion en vez de como objeto. 
+	Hace un camino sincronico cuando por ej. en el action hay funciones asincronicas, 
+	de este modo se setean las variables que se pasaran al Reducer, ya que si no,
+	se le pasarian variables sin valor.
+
+*) Redux-Saga: 	API para funciones asincronicas.
+				Es un midadleWare: lugar intermedio entre "Actions" y "Reducers".
+				Utiliza "Generator Function".
+				yield, reemplaza el await.
+		 Saga Effects: 	takeEvery(), -> recibe dos args, 1ro atcion.type y el segundo la funcion generator a ejecutar.Se ejecuta todas las veces que se libere action.type
+						takeLatest(), -> como takeEvery(), pero solo resuelve la utlima vez que se libera el evento
+						take(), -> toma solo el action.type. Devuelve una promesa de lo que ejecute action.payload. Pero se ejecuta una sola vez.
+						call, ->call, es como el then, ya que devuelve una promesa. 
+        						  1er arg, es una funcion y los demas los parametros que se le van a pasar a esa funcion
+						put, -> put, es como el dispatch en thunk.
+								pone las cosas de nuevo al flujo regular de redux
+						all, -> toma una array de sagas y los ejecuta
+
+*)Generator Function: Es un closure para mantener los valores.
+					yield -> frena la funcion hasta que se invoque "next()".
+		ej: function* generator(){ //-->el asterisco indica que es generator 
+							yield i; //-> campos se nombran con la palabra yield en vez de var/const
+							yield i + 10;
+							return 25;
+						} 
+				Se invocan-> const g=generator(5)
+								const gObj= g.next(); //->recorre y devuelve el valor de los campos
+*) Hooks: 	Modulo nuevo de React que tienen mas performance que "class", 
+			por lo que implementa sus propios metodos para sustituir los
+			de ciclo de vida como: componentDidMoun(), etc.
+			Son: Effects ->  reemplaza componentDidMount(), componentWillUnMount()
+
+*) API:		Es una aplicacion que expone sus url o "endpoints" (/users/:id/post, o biblioteca que la provea), 
+			a las peticiones que se le hagan desde nuestro programa.   
+			Son por ejemplo: firebase, stripe, mercadopago, youtube

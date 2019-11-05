@@ -2,6 +2,7 @@ const express = require('express'); //En el servidor no se usa es6, por esto se 
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
+const compression = require ('compression');//--> comprime codigo para ser subido a heroku
 
 if (process.env.NODE_ENV !== 'production') require('dotenv').config(); //accede .env para la clave secreta
 //requerir de la biblioteca 'stripe' y luego invocar el proceso de obtencion de la clave (se le fijo la ruta en "require('dotenv').config();"). 
@@ -10,6 +11,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const app = express();
 const port = process.env.PORT || 5000;
 
+app.use(compression());
 app.use(bodyParser.json()); //Middalware: que hace que todos los request los parsee a json
 app.use(bodyParser.urlencoded({ extended: true })); //hace que se pasen solo los caracteres habilitados para url
 

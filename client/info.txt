@@ -30,7 +30,6 @@ Comandos:
 
 8) yarn add axios
 
-
 -----
 APIs:
 ----
@@ -117,6 +116,9 @@ Performance:
 							Usa Memoization, este proceso sin embargo tarda mas en cargar la primera vez.
 							ej. 
 							export default React.memo(CartItem); -> cambia solo la cantidad entonces Memoization recaga solo "quantity"
+
+			Gzipping -> compresor para heroku. 
+						!!! yarn add compression, va en nodes-modules-> server.js  
 
 			En el paso 1) se encuentra archivos chunks: 
 							.chunks.js -> todas las bibliotecas que fueron importadas de manera estaticas (import x from '')

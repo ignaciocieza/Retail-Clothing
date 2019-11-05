@@ -16,6 +16,7 @@ Comandos:
 
 3)yarn
 
+4)yarn add compression
 
 ------
 Notas:

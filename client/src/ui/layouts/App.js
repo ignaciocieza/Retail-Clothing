@@ -7,12 +7,13 @@ import {
     checkUserSession,
 } from '../../api/actions/indexActions';
 import './app.styles.css';
+//import {GlobalStyle} from './global.styles';
 
 
 const App = ({ checkUserSession }) => {
 
     //unsubscribeFromAuth = null;
-    
+
     useEffect(() => {
         checkUserSession();
     }, [checkUserSession]);
@@ -28,6 +29,7 @@ const App = ({ checkUserSession }) => {
 
     return (
         <React.Fragment>
+            {/* <GlobalStyle /> */}
             <Header />
             <Main />
         </React.Fragment>

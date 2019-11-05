@@ -1,4 +1,4 @@
-------
+﻿------
 Links:
 ------
 	
@@ -65,7 +65,64 @@ heroku: servidor
 
 							en caso de modificarse solamente la aplicacion sin los nodes-modules
 							Solo hacer pasos 0 y 3. !!!!!
+		--------------------
+		actualizar servidor: (con una herokuapp que exista en .git)
+		--------------------
+			1)heroku apps //--> muestras nuestras aplicaciones heroku
+			
+			2)heroku git:remote -a "nombre del servidor(ej. commerce-server-live)"
 
+			3)git remote //-->obtener los repositorios remotos (ej. origin / heroku)
+
+			4)heroku buildpacks //--> lista la carpeta build en heroku, copiar link
+								//--> se debe remover para poder add el server.js
+
+			5)heroku buildpacks:remove https://github.com/mars/create-react-app-buildpack.git
+
+			6)git push heroku master (agregar "--force" en caso de error. Pero no es buena practica)
+
+			//paso para configurar el token (.env)
+
+			7)heroku config:set STRIPE_SECRET_KEY=sk_test_Cdlj0mHNlP61b5tLSf2JJDeN00QM5ngKHI
+
+			8)heroku open //-->abre el proyecto en el explorador
+
+------------
+Performance:
+------------
+		Es una relacion entre costo/beneficio --> por lo que siempre se debe medir si es conveniente el cambio.
+
+	Pasos:
+			1)Inspeccionar app en heroku -> network
+
+			2) ctrl + f5 (reload) (en chrome)
+	
+	Elementos:
+
+			React.lazy -> importa bibliotecas de manera dinamica (asincronica) para que el archivo ".chunks.js"
+							sea mas liviano.
+						Al importar de manera dinamica, da error: componente no definido.
+						Para solucionar esto se usas Suspense.
+			
+			Suspense-> componente que supervisa la importacion dinamica, o sea, asincronica 
+						de bibliotecas. 
+					 "fallback" -> propiedad que llama a un componente interino.
+			
+			ErrorBundaries-> al ser dinamica la peticion con Suspense, si se llega a caer el servidor
+							 quedara el spinner y Suspense debe manejar el error.
+							 Se usan ciclo de vidas de las class
+							 !!!!Es un componente que debe ser colocado encima de Suspense!!!!
+			
+			React.memo() ->	funcion que evalua que no se renderize todo el componente, sino solo lo que cambia.
+							Usa Memoization, este proceso sin embargo tarda mas en cargar la primera vez.
+							ej. 
+							export default React.memo(CartItem); -> cambia solo la cantidad entonces Memoization recaga solo "quantity"
+
+			En el paso 1) se encuentra archivos chunks: 
+							.chunks.js -> todas las bibliotecas que fueron importadas de manera estaticas (import x from '')
+							main.chunks.js -> nuestro codigo 
+							main.chunks.css -> todas las hojas de estilos
+				Al usar lazy y Suspense: se genera un nuevo "chunk" -> 0.chunk.js
 --------
 Notas:
 --------
@@ -92,7 +149,28 @@ Notas:
     	No pueden ser seteadas como varibles, porque se encuentra dentro de una clase.
     	Las variables solo pueden ser seteadas dentro de funciones.  
 
-*) 	Patrones: son metodos o manera de hacer algo que se repite. 
+*) Patrones: son metodos o manera de hacer algo que se repite. 
+
+		Tipos:
+				Container Pattern:  usa compose ('redux') 
+									une en un componente varios componentes.
+									ej:
+						const CollectionContainer = compose(
+    						connect(mapStateToProps),
+    						WithSpinner
+						)(Collection);
+				
+*) Componentes:
+
+		Tipos:
+				HOC: componente que toma otro componente y lo devuelve con nuevas funciones.
+
+				React.Component: class -> stateful
+
+				React.PureComponent: como React.Component, pero realiza comparaciones para actualizar o no el componente.
+									 reemplaza React.memo en componentes funcionales ??? 
+
+				funcitional: stateless (hook).
 
 *)	Reduce: funcion con dos parametro que obtiene un valor de un array. 1arg, callback. 2do, el valor inicial del acumulador.
     1arg (callback), tiene tmb dos parametro. El primero es el acumulador y el segundo el primer elemento del array (dependiendo del 2do arg).

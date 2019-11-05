@@ -16,7 +16,8 @@ const mapStateToProps = createStructuredSelector({
                                                         //para poder retornar un boolean, con el "!"
 });
 
-//Flujo: se pasa Collection a WithSpinner quien recive las props del connect  
+//Flujo: se pasa Collection a WithSpinner quien recive las props del connect
+//       el flujo va del ultimo componente al primero  
 const CollectionContainer = compose(
     connect(mapStateToProps),
     WithSpinner

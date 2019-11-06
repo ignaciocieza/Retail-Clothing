@@ -18,6 +18,8 @@ Comandos:
 
 4)yarn add compression
 
+5)yarn add express-sslify //-->para encriptar https (paso 1 de PWA)
+
 ------
 Notas:
 ------

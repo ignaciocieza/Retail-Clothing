@@ -25,7 +25,7 @@ const CheckOut = lazy(() => import('../paginas/checkout/CheckOut'));
 const CollectionOverviewContainer = lazy(() => import('../paginas/collections-overview/CollectionOverviewContainer'));
 const CollectionContainer = lazy(() => import('../paginas/collection/CollectionContainer'));
 
-const Main = ({ fetchCollectionsStart }) => {
+const Main = ({ fetchCollectionsStart, currentUser }) => {
 
   useEffect(() => { //(*notas: Hooks)
     fetchCollectionsStart();
@@ -42,7 +42,7 @@ const Main = ({ fetchCollectionsStart }) => {
             <Route exact path='/checkout' component={CheckOut} />
             <Route exact path='/signin' render={() => {
               return (
-                this.props.currentUser ?
+                currentUser ?
                   (<Redirect to='/' />) :
                   (<SignInAndSignUpPage />)
               )

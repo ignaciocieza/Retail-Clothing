@@ -8,6 +8,15 @@ Links:
 
 	https://www.styled-components.com/ //(*notas)  
 
+	https://hnpwa.com/ //-->progresive web app
+
+	https://developers.google.com/web/progressive-web-apps/checklist //-->progresive web app
+
+	https://letsencrypt.org/docs/ //-->encripta con el protocolo https
+
+	https://www.cloudflare.com/es-la/ //-->servidor (como heroku)
+
+	https://pages.github.com/ //-> web desde github !!!!!!!!!!
 
 ---------
 Comandos:
@@ -29,6 +38,8 @@ Comandos:
 7) yarn add redux-saga
 
 8) yarn add axios
+
+ (yarn list react -> ver react version)
 
 -----
 APIs:
@@ -118,13 +129,50 @@ Performance:
 							export default React.memo(CartItem); -> cambia solo la cantidad entonces Memoization recaga solo "quantity"
 
 			Gzipping -> compresor para heroku. 
+						Deja los .chunk del tamaño que tienen que ser. 
 						!!! yarn add compression, va en nodes-modules-> server.js  
+			
+			React Profile: Componente que mide el tiempo de rendeo
+					1) chequear version -> React List -> yarn list react 
+					2) { Profiler } from 'react';
+					3) <Profiler> encerrar componentes
 
 			En el paso 1) se encuentra archivos chunks: 
 							.chunks.js -> todas las bibliotecas que fueron importadas de manera estaticas (import x from '')
 							main.chunks.js -> nuestro codigo 
 							main.chunks.css -> todas las hojas de estilos
 				Al usar lazy y Suspense: se genera un nuevo "chunk" -> 0.chunk.js
+
+-------------------
+Progresive web app (PWA):
+-------------------
+
+	Hacer paginas web que funcionen como aplicaciones para escritorio o telefonos. 
+	Se puede acceder a parte de su contenido sin la necesidad de internet. 
+	Hace que una web tenga mayor performance
+
+	Para medir si una web es pwa, se usa lighthouse (google app).
+
+	Elementos:
+
+			1)La pagina web debe tener protocolo "https"-> ver link para encriptar 
+
+			2)App Manifest: controla como debe comportarse la web, 
+							en lugares como dispositivos mobiles
+							Ej: iconos que deben verse, el color incial de fondo, etc.
+
+					en public-> "manifest.json"
+			
+			3)Service Worker: 
+					Tiene acceso al "proxy" de manera programable.
+					Ayuda a que la aplicacion corra sin necesidad de internet,
+					gracias al "proxy" que registra si es necesario hacer peticion a internet,
+					ya que compara con el cahche anteriormete
+					src -> registerServiceWorker.js 
+					Crea el archivos Service-Worker.js en build (yarn build).
+					Estos pasos deben hacerse en el server.js (ver).
+
+
 --------
 Notas:
 --------

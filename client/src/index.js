@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react'; //(*)
 import App from './ui/layouts/App';
 import { store, persistor } from './api/store';
+import * as serviceWorker from './serviceWorker';
 import './index.css';
 
 
@@ -18,3 +19,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+
+serviceWorker.register();//petcion para que funcione como PWA

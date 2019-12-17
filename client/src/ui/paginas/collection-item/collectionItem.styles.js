@@ -11,8 +11,10 @@ imageContainer: {
     position: "relative",
 },
 image: {
-    maxWidth: '96%', 
-    maxHeight: '100%',
+    // maxWidth: '96%', 
+    // maxHeight: '100%',
+    width: '96%', 
+    height: '100%',
     zIndex:1,
 },
 addShoppingCartIcon: {

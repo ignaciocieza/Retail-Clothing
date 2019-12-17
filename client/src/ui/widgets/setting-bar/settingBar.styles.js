@@ -4,6 +4,14 @@ const useStyles = makeStyles(theme => ({
     root: {
         background: theme.palette.primary.main,
     },
+    text:{
+        fontSize:12,
+        marginRight:"5%",
+        [theme.breakpoints.down('md')]: {
+            fontSize:11,
+            marginRight:"0%",
+        },
+    },
     frontDiv: {
         height: '6.2vh',
         display: 'flex',

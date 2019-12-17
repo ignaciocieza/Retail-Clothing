@@ -22,6 +22,7 @@ import {
     SIGN_UP_FAILURE,
     SET_CART_FROM_FIREBASE,
     SEARCH_VALUE,
+    SHOW_TEXT,
     // UPDATE_CART_IN_FIREBASE
 } from './typeActions';
 import {
@@ -47,6 +48,10 @@ export const toggleMenuHiddenToTrue = () => {
     });
 };
 
+export const showText=()=>({
+    type: SHOW_TEXT
+})
+
 export const addItem = (item) => ({
     type: ADD_ITEM,
     payload: item
@@ -61,7 +66,6 @@ export const removeItem = item => ({
     type: REMOVE_ITEM,
     payload: item
 });
-
 
 export const googleSignInStart = () => ({
     type: GOOGLE_SIGN_IN_START
@@ -145,6 +149,8 @@ export const fetchCollectionsFailure = errorMessage => ({
     type: FETCH_COLLECTIONS_FAILURE,
     payload: errorMessage
 });
+
+
 
 //-------Fetch con Thunk-------------------
 export const fetchCollectionsStartAsync = () => dispatch => {
@@ -285,6 +291,7 @@ export function* updateCartInFirebase() {
     }
     else{
         console.log("debe logearse el usuario para poder comprar");
+        yield put(showText());
         // invocar una actions para que suba al store el error -> componente "debe logearse"
     }
 }

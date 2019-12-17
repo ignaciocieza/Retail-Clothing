@@ -96,6 +96,11 @@ export const selectCartItemsCount = createSelector(
     )
 );
 
+export const selectShowText = createSelector(
+    [selectCart],
+    (cart) => cart.showText
+);
+
 export const selectCurrentUser = createSelector(
     [selectUser],
     (user) => user.currentUser

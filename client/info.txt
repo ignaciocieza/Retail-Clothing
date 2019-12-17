@@ -88,6 +88,8 @@ heroku: servidor
 								//--> se debe remover para poder add el server.js
 
 			5)heroku buildpacks:remove https://github.com/mars/create-react-app-buildpack.git
+	
+			5')heroku buildpacks:set https://github.com/mars/create-react-app-buildpack.git -a commerce-server-live //--> en caso de agregar la bilbioteca
 
 			6)git push heroku master (agregar "--force" en caso de error. Pero no es buena practica)
 

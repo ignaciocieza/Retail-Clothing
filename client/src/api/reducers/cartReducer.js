@@ -6,6 +6,7 @@ import {
     REMOVE_ITEM,
     CLEAR_CART,
     SET_CART_FROM_FIREBASE,
+    SHOW_TEXT
 } from '../actions/typeActions';
 import {
     addItemToCart,
@@ -15,7 +16,8 @@ import {
 
 const INITIAL_STATE = {
     hidden: true,
-    cartItems: []
+    cartItems: [],
+    showText: false
 };
 
 const cartReducer = (state = INITIAL_STATE, action) => {
@@ -29,6 +31,11 @@ const cartReducer = (state = INITIAL_STATE, action) => {
             return ({
                 ...state,
                 hidden: true
+            })
+        case SHOW_TEXT:
+            return ({
+                ...state,
+                showText: true
             })
         case ADD_ITEM:
             return ({

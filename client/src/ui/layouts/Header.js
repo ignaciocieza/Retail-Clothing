@@ -1,65 +1,89 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import { createStructuredSelector } from 'reselect';
-import { ReactComponent as Logo } from '../../assets/crown.svg';
-import CartIcon from '../widgets/cart-icon/CartIcon';
-import CartDropDown from '../widgets/cart-dropdown/CartDropDown';
+import { selectCurrentUser, selectCartHidden } from '../../api/reducers/helperFunctions';
+import { signOutStart, toggleMenuHidden } from '../../api/actions/indexActions';
 import {
-  selectCartHidden,
-  selectCurrentUser
-} from '../../api/reducers/helperFunctions';
-import { signOutStart } from '../../api/actions/indexActions';
-import {
-  HeaderContainer,
-  LogoContainer,
-  OptionsContainer,
-  OptionDiv
-} from './headerStyles.js';
+  AppBar, CssBaseline, IconButton, Button, Toolbar, Hidden
+} from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
+import SearchBar from '../widgets/search-bar/SearchBar';
+import LocalPlayIcon from '@material-ui/icons/LocalPlay';
+import useStyles from './headerStyles';
+import MenuPhone from '../paginas/menu-phone/MenuPhone';
 
+const Header = ({ currentUser, signOutStart, toggleMenuHidden, hidden, history }) => {
 
-const Header = ({ currentUser, hidden,signOutStart }) => (
-  <HeaderContainer>
-    <LogoContainer as={Link} to='/'>
-      <Logo className='logo' />
-    </LogoContainer>
-    <OptionsContainer>
-      <OptionDiv as={Link} to='/shop'>
-        SHOP
-      </OptionDiv>
-      <OptionDiv to='/shop'>
-        CONTACT
-      </OptionDiv>
-      {currentUser ? (
-        <OptionDiv onClick={signOutStart}>
-          SING OUT
-        </OptionDiv>
-      ) : (
-          <OptionDiv as={Link} to='/signin'>
-            SING IN
-        </OptionDiv>
-        )
-      }
-      <CartIcon />
-    </OptionsContainer>
-    {hidden ? null : <CartDropDown />}
-  </HeaderContainer>
-);
+  const classes = useStyles();
 
-/**
- * @param {Foma de desestructurar, un reducer combinado} param0 
- * { user: { currentUser }, cart: { hidden } }
- * 
- */// !!!"createStructuredSelector" -> evita repetir el 'state', ya que lo pasa automaticamente.
+  return (
+    <React.Fragment>
+      <div className={classes.contentShadow}></div>
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar className={classes.appBar}>
+          <Toolbar  >
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              className={classes.menuButton}
+              // component={Link}
+              // to='/menu'
+              onClick={toggleMenuHidden} //on cartReducer
+            >
+              <MenuIcon className={classes.menuIcon} />
+              {/* <div color="inherit" className={classes.buttonIcon} >
+                <Logo className={classes.logo} />                
+              </div> */}
+              <LocalPlayIcon className={classes.buttonIcon} />
+            </IconButton>
+            <Hidden smDown >
+              <div className={classes.content}>
+                {/* <Button color="inherit" className={classes.buttonIcon} component={Link} to='/' > */}
+                {/* <Logo className={classes.logo}/> */}
+                <LocalPlayIcon className={classes.buttonIcon} onClick={() => history.push("/")} />
+                {/* </Button> */}
+                <Button color="inherit" className={classes.button} component={Link} to='/shop/womens'>WOMEN</Button>
+                <Button color="inherit" className={classes.button} component={Link} to='/shop/mens'>MEN</Button>
+                <Button color="inherit" className={classes.button} component={Link} to='/shop/jackets'>JACKETS</Button>
+                <Button color="inherit" className={classes.button} component={Link} to='/shop/sneakers'>SNEAKERS</Button>
+                <Button color="inherit" className={classes.button} component={Link} to='/shop/hats'>HATS</Button>
+                <Button color="inherit" className={classes.button} component={Link} to='/shop'>SHOP</Button>
+                <div className={classes.barraVerticalContent}>
+                  <div className={classes.barraVertical}></div>
+                </div>
+                {
+                  currentUser ? (
+                    <Button color="inherit" className={classes.button} onClick={signOutStart}> SING OUT</Button>
+                  ) : (
+                      <Button color="inherit" className={classes.button} component={Link} to='/signin'> SING IN</Button>
+                    )
+                }
+              </div>
+              <div className={classes.searchIconContent}>
+                {/* <SearchIcon className={classes.searchIcon} /> */}
+                <SearchBar />
+              </div>
+            </Hidden>
+          </Toolbar>
+        </AppBar>
+      </div >
+      {hidden ? "" : <MenuPhone />}
+    </React.Fragment>
+  );
+};
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
-  hidden: selectCartHidden
+  hidden: selectCartHidden,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  signOutStart: bindActionCreators(signOutStart, dispatch)
+  signOutStart: bindActionCreators(signOutStart, dispatch),
+  toggleMenuHidden: bindActionCreators(toggleMenuHidden, dispatch),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

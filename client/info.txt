@@ -143,9 +143,9 @@ Performance:
 							main.chunks.css -> todas las hojas de estilos
 				Al usar lazy y Suspense: se genera un nuevo "chunk" -> 0.chunk.js
 
--------------------
+-------------------------
 Progresive web app (PWA):
--------------------
+-------------------------
 
 	Hacer paginas web que funcionen como aplicaciones para escritorio o telefonos. 
 	Se puede acceder a parte de su contenido sin la necesidad de internet. 
@@ -171,7 +171,65 @@ Progresive web app (PWA):
 					src -> registerServiceWorker.js 
 					Crea el archivos Service-Worker.js en build (yarn build).
 					Estos pasos deben hacerse en el server.js (ver).
+------
+Test:
+------
+Los test siempre corren para "development".
+Los teste pueden correrse en el DOM, en Puppeteer o jsdom. ????
 
+Tipos:
+
+	Unit Test: 	Testeo para cada funcion pura.
+				El testeo solo se realiza sobre cada unidad no comunica las unidades. 
+				Fuciones puras pertenecen a la programacion funcional.
+				Se basa en que el input (recibido como parametro) siempre devuelve algo, 
+				es decir, que todo input tiene su OutPut. ??es asi? 
+				En react, las funciones puras, son los stateless components (componentes sin ciclos de vida o estados).
+
+	Integration Test:
+				Comunicacion entre diferentes unidades del codigo.
+				Se necesita de bibliotecas especiales como mokha.
+	
+	Automation Test:
+				Test que corrern en el browser enviroment.
+				Se usa servicios como "testCafe", "nightmare".	
+Etapas:
+	1)scafolding -> 2)assertion library (para pedidos asincronicos)-> 
+	3)test runner (ej.nmp run test) ->4)Mock spies and stubbs (estadisticas de las funciones)
+	5)code covarage 
+
+Herramientas:
+	
+	Jest (resuelve todas las etapas de un test) -> es de facebook
+
+	Enzyme -> 	testear componentes.
+				Contiene elementos que simulan los ciclos de vida de los componentes.
+
+------------------
+WebPack and Babel: 
+------------------
+
+	Traduce el archivo escrito para maximizar la compatibilidad con los browser.
+	El template de create-react-app -> hace esta configuracion automaticamente.
+	Es una estandarizacion del codigo.
+
+	Pasos:
+		
+		1) yarn add webpack webpack-cli
+
+		2) yarn add @babel/core @babel/preset-env @babel/preset-react babel-loader// --> transpila a las version standar para los exploradores
+
+		3) webpack.config.js //-->add archivo a la carpeta principal
+								--> se debe usar sintaxis es5
+								--> utiliza escritura "regex" (regular expresion, escritura para hacer busquedas)
+
+		4) "build": "webpack --mode production" //--> add script
+
+		5) .babelrc //--> add archivo a la carpeta principal
+
+		6) yarn add style-loader css-loader   //-->convertidor de estilos (css)
+
+		7) yarn add html-loader html-webpack-plugin //-->crea los .chunks		
 
 --------
 Notas:
@@ -215,12 +273,12 @@ Notas:
 		Tipos:
 				HOC: componente que toma otro componente y lo devuelve con nuevas funciones.
 
-				React.Component: class -> stateful
+				React.Component: class -> "stateful"
 
 				React.PureComponent: como React.Component, pero realiza comparaciones para actualizar o no el componente.
 									 reemplaza React.memo en componentes funcionales ??? 
 
-				funcitional: stateless (hook).
+				funcitional: "stateless" (hook).
 
 *)	Reduce: funcion con dos parametro que obtiene un valor de un array. 1arg, callback. 2do, el valor inicial del acumulador.
     1arg (callback), tiene tmb dos parametro. El primero es el acumulador y el segundo el primer elemento del array (dependiendo del 2do arg).

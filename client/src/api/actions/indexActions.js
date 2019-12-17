@@ -1,6 +1,7 @@
-import { takeLatest, call, put, all } from 'redux-saga/effects';
+import { takeLatest, call, put, all, select } from 'redux-saga/effects';
 import {
-    TOGGLE_CART_HIDDEN,
+    TOGGLE_MENU_HIDDEN,
+    TOGGLE_MENU_HIDDEN_TRUE,
     ADD_ITEM,
     CLEAR_ITEM_FROM_CART,
     REMOVE_ITEM,
@@ -18,7 +19,10 @@ import {
     CLEAR_CART,
     SIGN_UP_START,
     SIGN_UP_SUCCESS,
-    SIGN_UP_FAILURE
+    SIGN_UP_FAILURE,
+    SET_CART_FROM_FIREBASE,
+    SEARCH_VALUE,
+    // UPDATE_CART_IN_FIREBASE
 } from './typeActions';
 import {
     firestore,
@@ -26,12 +30,20 @@ import {
     auth,
     googleProvider,
     createUserProfileDocument,
-    getCurrentUser
+    getCurrentUser,
+    getUserCartRef,
 } from '../../api/db/firebase.utils';
+import { selectCartItems, selectCurrentUser } from '../reducers/helperFunctions';
 
-export const toggleCartHidden = () => {
+export const toggleMenuHidden = () => {
     return ({
-        type: TOGGLE_CART_HIDDEN
+        type: TOGGLE_MENU_HIDDEN
+    });
+};
+
+export const toggleMenuHiddenToTrue = () => {
+    return ({
+        type: TOGGLE_MENU_HIDDEN_TRUE
     });
 };
 
@@ -106,8 +118,22 @@ export const signUpFailure = (error) => ({
     payload: error
 });
 
+export const searchValue=(value)=>({
+    type: SEARCH_VALUE,
+    payload: value
+})
+
 export const fetchCollectionsStart = () => ({
     type: FETCH_COLLECTIONS_START
+});
+
+// export const updateCartInFirebase = () => ({
+//     type: UPDATE_CART_IN_FIREBASE
+// });
+
+export const setCartFromFirebase = cartItems => ({
+    type: SET_CART_FROM_FIREBASE,
+    payload: cartItems
 });
 
 export const fetchCollectionsSuccess = collectionsMap => ({
@@ -236,9 +262,31 @@ export function* signUp({ payload: { email, password, displayName } }) {
     }
 }
 
-export function* signInAfterSignUp({ payload: { user, additionalData} }) {
+export function* signInAfterSignUp({ payload: { user, additionalData } }) {
     yield getSnapshotFromUserAuth(user, additionalData);
+}
 
+export function* checkCartFromFirebase({ payload: user }) {
+    const cartRef = yield getUserCartRef(user.id);
+    const cartSnapshot = yield cartRef.get();
+    yield put(setCartFromFirebase(cartSnapshot.data().cartItems));
+}
+
+export function* updateCartInFirebase() {
+    const currentUser = yield select(selectCurrentUser);
+    if (currentUser) {
+        try {
+            const cartRef = yield getUserCartRef(currentUser.id);
+            const cartItems = yield select(selectCartItems);
+            yield cartRef.update({ cartItems });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    else{
+        console.log("debe logearse el usuario para poder comprar");
+        // invocar una actions para que suba al store el error -> componente "debe logearse"
+    }
 }
 
 //Nota: el prefijo "on", 
@@ -288,6 +336,27 @@ export function* onSignUpSuccess() {
 }
 
 /**
+ * chequea el carro de compras desde firebase
+ */
+export function* onUserSignIn() {
+    yield takeLatest(SIGN_IN_SUCCESS, checkCartFromFirebase);
+}
+
+/**
+ * Funcion para subir el carro de compras a firebase
+ */
+export function* onCartChange() {
+    yield takeLatest(
+        [
+            ADD_ITEM,
+            REMOVE_ITEM,
+            CLEAR_ITEM_FROM_CART
+        ],
+        updateCartInFirebase
+    );
+}
+
+/**
  * funcion que une todos los sagas del action,
  * para luego pasarlos al store
  */
@@ -300,6 +369,8 @@ export function* rootSaga() {
         call(onSignOutStart),
         call(onSignUpStart),
         call(onSignUpSuccess),
+        call(onUserSignIn),
+        call(onCartChange)
     ]);
 }
 //-------------------------------------------------------------------------------//

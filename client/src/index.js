@@ -6,17 +6,19 @@ import { PersistGate } from 'redux-persist/integration/react'; //(*)
 import App from './ui/layouts/App';
 import { store, persistor } from './api/store';
 import * as serviceWorker from './serviceWorker';
-import './index.css';
-
+import { MuiThemeProvider } from '@material-ui/core';
+import theme from './indexTheme.styles';
 
 ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <PersistGate persistor={persistor}>
-        <App />
-      </PersistGate>
-    </BrowserRouter>
-  </Provider>,
+  <MuiThemeProvider theme={theme}>
+    <Provider store={store}>
+      <BrowserRouter>
+        <PersistGate persistor={persistor}>
+          <App />
+        </PersistGate>
+      </BrowserRouter>
+    </Provider>
+  </MuiThemeProvider>,
   document.getElementById('root')
 );
 

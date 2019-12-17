@@ -1,38 +1,50 @@
 .checkout-page {
-  width: 55%;
-  min-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 50px auto 0;
 
-  .checkout-header {
-    width: 100%;
-    padding: 10px 0;
+  .checkout-header {    
+    width: 80vw;
+    padding: 1%;
     display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid darkgrey;
+    justify-content: center;
+    border-bottom: 0.1rem solid darkgray;
+    font-size: 1.2rem;
+    font-weight: lighter;
+
+    @media (max-width: 960px) {
+      font-size: 0.8rem;
+      width: 90vw;
+      padding: 2%;
+    }
 
     .header-block {
       text-transform: capitalize;
-      width: 23%;
-
+      flex-grow: 1;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      
       &:last-child {
         width: 8%;
       }
     }
   }
-
   .total {
-    margin-top: 30px;
-    margin-left: auto;
-    font-size: 36px;
+    font-size: 2rem;
+    align-self: center;
+    margin-top: 3%;
+    margin-left: 62%;
+
+    @media (max-width: 960px) {
+      margin-left: 57%;
+      font-size: 1.4rem;
+    }
   }
 
-  button {
-    margin-left: auto;
-    margin-top: 50px;
-    margin-bottom: 10px;
+  .button {
+    margin:1%;
+    background-color: #ffdcd1;
   }
 
   .test-warning {

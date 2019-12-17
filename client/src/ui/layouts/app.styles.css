@@ -1,13 +1,13 @@
-body {
-    font-family: 'Open Sans Condensed';
-    padding: 20px 40px;
-  }
-  
-  a {
-    text-decoration: none;
-    color: black;
-  }
-  
-  * {
-    box-sizing: border-box;
-  }
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* font-family: 'Roboto'; */
+}
+
+.app{
+  background-color: #fff;
+  /* z-index: 0; */
+  width: 100vw;
+  height: 100vh;
+}

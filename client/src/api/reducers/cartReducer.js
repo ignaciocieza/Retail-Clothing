@@ -1,9 +1,11 @@
 import {
-    TOGGLE_CART_HIDDEN,
+    TOGGLE_MENU_HIDDEN,
+    TOGGLE_MENU_HIDDEN_TRUE,
     ADD_ITEM,
     CLEAR_ITEM_FROM_CART,
     REMOVE_ITEM,
-    CLEAR_CART
+    CLEAR_CART,
+    SET_CART_FROM_FIREBASE,
 } from '../actions/typeActions';
 import {
     addItemToCart,
@@ -18,10 +20,15 @@ const INITIAL_STATE = {
 
 const cartReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case TOGGLE_CART_HIDDEN: 
+        case TOGGLE_MENU_HIDDEN:
             return ({
                 ...state,
                 hidden: !state.hidden
+            })
+        case TOGGLE_MENU_HIDDEN_TRUE:
+            return ({
+                ...state,
+                hidden: true
             })
         case ADD_ITEM:
             return ({
@@ -39,10 +46,15 @@ const cartReducer = (state = INITIAL_STATE, action) => {
                 cartItems: removeItemFromCart(state.cartItems, action.payload)
             });
         case CLEAR_CART:
-            return({
+            return ({
                 ...state,
-                cartItems:[]
+                cartItems: []
             });
+        case SET_CART_FROM_FIREBASE:
+            return ({
+                ...state,
+                cartItems: action.payload
+            })
         default:
             return state;
     }

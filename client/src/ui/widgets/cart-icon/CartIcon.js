@@ -1,28 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from "redux";
+import { withRouter } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
-import { ReactComponent as ShoppingIcon } from '../../../assets/shopping-bag.svg';
-import {
-    toggleCartHidden
-} from '../../../api/actions/indexActions';
-import {selectCartItemsCount} from '../../../api/reducers/helperFunctions';
-import './cartIcon.styles.scss';
+import { selectCartItemsCount } from '../../../api/reducers/helperFunctions';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+// import './cartIcon.styles.scss';
+import useStyles from './cartIcon.styles.js';
 
+const CartIcon = ({ itemCount, history }) => {
 
-const CartIcon = ({ toggleCartHidden, itemCount }) => (
-    <div className='cart-icon' onClick={toggleCartHidden}>
-        <ShoppingIcon className='shopping-icon' />
-        <span className='item-count'>{itemCount}</span>
-    </div>
-);
+    const classes = useStyles();
 
-const mapDispatchToProps = (dispatch) => ({
-    toggleCartHidden: bindActionCreators(toggleCartHidden, dispatch)
-})
+    return (
+        <React.Fragment>
+            <div className={classes.contentShadow}></div>
+            <div className={classes.contentShadowTwo}></div>
+            <div className={classes.footer}  >{
+                itemCount > 0 ? (<div className={classes.bubleCart}>
+                    <span className={classes.bubleCartText} >{itemCount}</span>
+                </div>) : ""}
+                <ShoppingCartIcon className={classes.shoppingCartIcon} onClick={() => history.push('/checkout')} />
+            </div>
+        </React.Fragment>
+    );
+};
 
-const mapStateToProps =createStructuredSelector ({    
+const mapStateToProps = createStructuredSelector({
     itemCount: selectCartItemsCount
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(CartIcon);
+export default withRouter(connect(mapStateToProps, null)(CartIcon));

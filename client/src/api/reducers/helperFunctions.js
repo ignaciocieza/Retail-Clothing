@@ -12,8 +12,7 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
                 : cartItem
         );
     }
-
-    //si no se encuentra el item, se seta a todos los items elegidos con la cantidad: 1
+    //si no se encuentra el item, se setea a todos los items elegidos con la cantidad: 1
     return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
 };
 
@@ -37,7 +36,34 @@ export const clearItem = (cartItems, cartItemToRemove) => (
     cartItems.filter(item => (
         item.id !== cartItemToRemove.id
     ))
-)
+);
+
+/**
+ * Funcion que usa "searchValues", 
+ * para buscar productos por el titulo.
+ * @param {valores provenientes del store} allProdcuts 
+ * @param {*valores ingresados por el usuario} searchValues 
+ */
+export const filterSearchCollections = (collections, searchValues) => {
+    let collectionsToArray = Object.values(collections);
+    let productList = [];
+    let arrayAux = null;
+
+    collectionsToArray.forEach(product => {
+
+        arrayAux = product.items.filter((item, idx )=>{
+            return (item.name.toLowerCase().indexOf(searchValues.toLowerCase()) !== -1) && idx < 5
+        });
+
+        if (arrayAux.length) {
+            arrayAux.forEach(element =>{
+                productList.push(element);
+            })            
+        }
+    });
+    
+    return productList;
+};
 
 //--Selectors--------Se aplica en: "cart-icon", "cart-dropdown" , "header", etc
 
@@ -123,11 +149,16 @@ export const selectIsCollectionFetching = createSelector(
 
 /**
  * !!, doble negacion convierte un valor determinado en un "boolean"
- * da true si no contiene ningun elemento false. Ej !!0 ->false , !!1 ->true
+ * , si no contiene ningun elemento da false. Ej !!0 ->false , !!1 ->true
  * Se usa en Main.js
  */
 export const selectIsCollectionLoaded = createSelector(
     [selectShop],
     (shop) => !!shop.collections
+);
+
+export const selectCollectionsSearchValues = createSelector(
+    [selectShop],
+    (shop) => shop.collectionsSearchValues
 );
 

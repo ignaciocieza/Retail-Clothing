@@ -7,7 +7,7 @@ import useStyles from './settingBar.styles';
 
 const SettingBar = ({showText,currentUser}) => {
     const clasess = useStyles();
-    console.log(showText);
+    
     return (
         <div className={clasess.root} >            
             <div className={clasess.frontDiv}>

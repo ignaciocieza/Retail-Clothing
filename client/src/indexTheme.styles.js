@@ -1,5 +1,7 @@
 import {createMuiTheme } from '@material-ui/core';
 
+let h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+
 const theme=createMuiTheme({
     palette:{
         primary: {
@@ -13,7 +15,9 @@ const theme=createMuiTheme({
             light:'ffffff',
         },
         // type: 'main'
-    }
+    },
+    height: h, //calcula el height en mobil y 
+            // hace que no se desplace el contenido al modif. el height de la pantalla
 });
 
 export default theme;

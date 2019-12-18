@@ -15,7 +15,8 @@ const useStyles = makeStyles(theme => ({
     },
     root: {
         display: 'flex',
-        height: '9vh',        
+        // height: '9vh', 
+        height: `calc(${theme.height}px * 0.09)`,       
     },
     appBar: {
         boxShadow: theme.shadows[0],

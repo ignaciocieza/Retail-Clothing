@@ -1,7 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
-
     contentShadow: {
         width: "4%",
         height: "42%",
@@ -15,7 +14,8 @@ const useStyles = makeStyles(theme => ({
             top: "0%",
             left: "0%",
             width: "65%",
-            height: "13%",
+            //height: "13%",
+            height: `calc(${theme.height}px * 0.13)`,
             boxShadow: theme.shadows[5],
         }
     },
@@ -46,8 +46,10 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down('md')]: {
             position: "absolute",
             width: "70%",
-            height: "5%",
-            top: "9%",
+            //height: "5%",
+            height: `calc(${theme.height}px * 0.05)`,
+            //top: "9%",
+            top:`calc(${theme.height}px * 0.09)`,
             left: "0%",
             clipPath: "polygon(6% 0%, 100% 0, 93% 100%, 0 100%, 0% 81%)",
             flexDirection: "row",

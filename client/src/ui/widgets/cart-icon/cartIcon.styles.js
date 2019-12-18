@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
         right: '0%',
         bottom: '0%',
         width: '7%',
-        height: '10%',
+        height: '10%',        
         background: theme.palette.secondary.main,
         clipPath: 'polygon(25% 0%, 100% 0, 100% 100%, 0 100%, 0% 38%)',
         display: "flex",
@@ -39,7 +39,8 @@ const useStyles = makeStyles(theme => ({
         alignItems: "center",
         [theme.breakpoints.down('md')]: {
             width: '12%',
-            height: '6%',
+            //height: '6%',
+            height: `calc(${theme.height}px * 0.06)`,
             zIndex:2,
         },
     },

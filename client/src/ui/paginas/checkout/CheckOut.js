@@ -46,7 +46,7 @@ const CheckoutPage = ({ cartItems, total, currentUser }) => (
             </div>)
             :
             (<Tooltip title="You must Sign In to Pay" placement="top" arrow className='button'>
-                <Button>Pay Now</Button>
+                <Button className='button'>Pay Now</Button>
             </Tooltip>)
         }
     </div>

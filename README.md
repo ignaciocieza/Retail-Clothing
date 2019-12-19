@@ -15,4 +15,11 @@ React React-Router Redux Redux-Saga React-Lazy React-Profile React-Hook Progresi
 
 ## Plataforma de Pago: Stripe.
 
+## Capturas:
 
+![](/capturas/home.png)
+![](/capturas/checkout-mobil.png)
+![](/capturas/menu-phone.png)
+![](/capturas/shop-search.png)
+![](/capturas/shop-women.png)
+![](/capturas/signin.png)

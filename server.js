@@ -64,7 +64,7 @@ app.post('/payment', (req, res) => {
 });
 
 app.post('/mercadopago', (req, res) => {
-
+    console.log("entro en mercadopago");
     mercadopago.configure({
         access_token: process.env.MERCADOPAGO_SECRET_KEY,
     })

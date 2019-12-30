@@ -96,6 +96,11 @@ export const selectCartItemsCount = createSelector(
     )
 );
 
+export const selectCartInitPoint= createSelector(
+    [selectCart],
+    (cart)=>cart.initPoint
+)
+
 export const selectShowText = createSelector(
     [selectCart],
     (cart) => cart.showText

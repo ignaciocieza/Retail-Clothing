@@ -14,8 +14,7 @@ const useStyles = makeStyles(theme => ({
         },
     },
     root: {
-        display: 'flex',
-        // height: '9vh', 
+        display: 'flex', 
         height: `calc(${theme.height}px * 0.09)`,       
     },
     appBar: {

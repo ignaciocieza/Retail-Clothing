@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import StripeButton from '../../widgets/stripe-button/StripeButton';
+import MercadoPago from '../../widgets/mercado-pago/MercadoPago';
 import CheckoutItem from '../../widgets/checkout-item/CheckoutItem';
 import {
     selectCartItems,
@@ -41,9 +42,14 @@ const CheckoutPage = ({ cartItems, total, currentUser }) => (
             4242 4242 4242 4242 - Exp: 01/20 - CVV: 123
         </div> */}
         {currentUser ?
-            (<div className='button'>
-                <StripeButton price={total} />
-            </div>)
+            (
+                <React.Fragment>
+                    <div className='button'>
+                        <StripeButton price={total} />
+                    </div>
+                    <MercadoPago />
+                </React.Fragment>
+            )
             :
             (<Tooltip title="You must Sign In to Pay" placement="top" arrow className='button'>
                 <Button className='button'>Pay Now</Button>

@@ -4,17 +4,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser, selectCartHidden } from '../../api/reducers/helperFunctions';
-import { signOutStart, toggleMenuHidden } from '../../api/actions/indexActions';
-import {
-  AppBar, CssBaseline, IconButton, Button, Toolbar, Hidden
-} from '@material-ui/core';
+import { signOutStart, toggleMenuHidden, setInitPoint } from '../../api/actions/indexActions';
+import { AppBar, CssBaseline, IconButton, Button, Toolbar, Hidden, Grow } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchBar from '../widgets/search-bar/SearchBar';
 import LocalPlayIcon from '@material-ui/icons/LocalPlay';
+import SearchBar from '../widgets/search-bar/SearchBar';
 import useStyles from './headerStyles';
 import MenuPhone from '../paginas/menu-phone/MenuPhone';
 
-const Header = ({ currentUser, signOutStart, toggleMenuHidden, hidden, history }) => {
+const Header = ({ currentUser, signOutStart, toggleMenuHidden, hidden, history, setInitPoint }) => {
 
   const classes = useStyles();
 
@@ -57,7 +55,16 @@ const Header = ({ currentUser, signOutStart, toggleMenuHidden, hidden, history }
                 </div>
                 {
                   currentUser ? (
-                    <Button color="inherit" className={classes.button} onClick={signOutStart}> SING OUT</Button>
+                    <Button
+                      color="inherit"
+                      className={classes.button}
+                      onClick={() => {
+                        signOutStart();
+                        setInitPoint(null);
+                      }}
+                    >
+                      SING OUT
+                    </Button>
                   ) : (
                       <Button color="inherit" className={classes.button} component={Link} to='/signin'> SING IN</Button>
                     )
@@ -71,8 +78,11 @@ const Header = ({ currentUser, signOutStart, toggleMenuHidden, hidden, history }
           </Toolbar>
         </AppBar>
       </div >
-      {hidden ? "" : <MenuPhone />}
-    </React.Fragment>
+      {/* {hidden ? "" : <MenuPhone />} */}
+      <Grow in={!hidden} mountOnEnter unmountOnExit timeout={1000}>
+        <MenuPhone />
+      </Grow>
+    </React.Fragment >
   );
 };
 
@@ -84,6 +94,7 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = (dispatch) => ({
   signOutStart: bindActionCreators(signOutStart, dispatch),
   toggleMenuHidden: bindActionCreators(toggleMenuHidden, dispatch),
+  setInitPoint: bindActionCreators(setInitPoint, dispatch),
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

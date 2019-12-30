@@ -41,6 +41,10 @@ Comandos:
 
  (yarn list react -> ver react version)
 
+ //------mercadopago--------//
+
+ 9) yarn add mercadopago
+
 -----
 APIs:
 ----

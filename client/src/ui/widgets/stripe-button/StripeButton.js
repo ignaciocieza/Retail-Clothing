@@ -9,24 +9,25 @@ const StripeButton = ({ price }) => {
 
     //peticion a nuestro servidor (server.js)
     const onToken = token => {
+
         axios({
             url: 'payment',
             method: 'post',
             data: {
                 amount: priceForStripe,
                 token
-            }
-        }).then(response =>{
+            },
+        }).then(response => {
             alert('Pago realiazado exitosamente');
-        }).catch(error=>{
-            console.log('Error en el pago:',JSON.parse(error));
+        }).catch(error => {
+            console.error('Error en el pago:', error);
             alert('Error en el pago');
         });
     };
 
     return (
         <StripeCheckout
-            label='Pay Now'
+            label='Pay With Stripe'
             name='Retail Clothing'
             billingAddress
             shippingAddress

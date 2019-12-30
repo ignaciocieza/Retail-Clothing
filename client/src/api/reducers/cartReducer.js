@@ -6,7 +6,8 @@ import {
     REMOVE_ITEM,
     CLEAR_CART,
     SET_CART_FROM_FIREBASE,
-    SHOW_TEXT
+    SHOW_TEXT,
+    INIT_POINT
 } from '../actions/typeActions';
 import {
     addItemToCart,
@@ -17,7 +18,8 @@ import {
 const INITIAL_STATE = {
     hidden: true,
     cartItems: [],
-    showText: false
+    showText: false,
+    initPoint: null,
 };
 
 const cartReducer = (state = INITIAL_STATE, action) => {
@@ -61,6 +63,11 @@ const cartReducer = (state = INITIAL_STATE, action) => {
             return ({
                 ...state,
                 cartItems: action.payload
+            })
+        case INIT_POINT:
+            return ({
+                ...state,
+                initPoint: action.payload
             })
         default:
             return state;

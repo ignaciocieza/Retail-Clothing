@@ -20,9 +20,15 @@ Comandos:
 
 5)yarn add express-sslify //-->para encriptar https (paso 1 de PWA)
 
+//------mercadopago--------//
+
+6) yarn add mercadopago
+
 ------
-Notas:
+Notas: 
 ------
+        !!Activar lineas de server.js al pasar a Heroku!!!
+
 *)nodemon:    
     Biblioteca que permite crear el server.
     Actualiza el servidor ante cualquier cambio.

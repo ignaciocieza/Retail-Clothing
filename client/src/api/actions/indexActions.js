@@ -23,6 +23,7 @@ import {
     SET_CART_FROM_FIREBASE,
     SEARCH_VALUE,
     SHOW_TEXT,
+    INIT_POINT
     // UPDATE_CART_IN_FIREBASE
 } from './typeActions';
 import {
@@ -139,6 +140,11 @@ export const setCartFromFirebase = cartItems => ({
     type: SET_CART_FROM_FIREBASE,
     payload: cartItems
 });
+
+export const setInitPoint = (initPoint) =>({
+    type: INIT_POINT,
+    payload:initPoint
+})
 
 export const fetchCollectionsSuccess = collectionsMap => ({
     type: FETCH_COLLECTIONS_SUCCESS,

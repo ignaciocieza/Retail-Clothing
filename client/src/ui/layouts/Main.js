@@ -20,6 +20,7 @@ const CollectionOverviewContainer = lazy(() => import('../paginas/collections-ov
 const CollectionContainer = lazy(() => import('../paginas/collection/CollectionContainer'));
 const MenuPhone = lazy(() => import('../paginas/menu-phone/MenuPhone'));
 const SearchPage = lazy(() => import('../paginas/search-page/SearchPage'));
+//
 
 const Main = ({ fetchCollectionsStart, currentUser }) => {
 
@@ -33,6 +34,7 @@ const Main = ({ fetchCollectionsStart, currentUser }) => {
         <ErrorBoundary>
           <Suspense fallback={<Spinner />}>
             <Route exact path='/' component={HomePage} />
+            {/* <Route exact path='/' component={Swipeable} /> */}
             <Route exact path='/search' component={SearchPage} />
             <Route exact path='/shop' component={CollectionOverviewContainer} />
             <Route path={`/shop/:collectionId`} component={CollectionContainer} />

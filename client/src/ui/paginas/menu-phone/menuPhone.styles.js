@@ -7,11 +7,9 @@ const useStyles = makeStyles(theme => ({
         boxShadow: theme.shadows[2],
     },
     content: {
-        //height: "87vh",
         height: `calc(${theme.height}px * 0.87)`,
         width: "100vw",
         position: "absolute",
-        //top: "14%",
         top: `calc(${theme.height}px * 0.14)`,
         left: "0%",
         zIndex: 1,

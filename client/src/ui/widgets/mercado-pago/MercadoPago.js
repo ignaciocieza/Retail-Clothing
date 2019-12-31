@@ -28,7 +28,7 @@ const MercadoPago = ({ cartItems, setInitPoint, initPoint }) => {
             data: {
                 items: arrayCartItemsModif
             },
-            // withCredentials: true,
+            withCredentials: true,
         }).then(response => {
             setInitPoint(response.data);
         }).catch(error => {
@@ -39,8 +39,7 @@ const MercadoPago = ({ cartItems, setInitPoint, initPoint }) => {
 
     return (
         <React.Fragment>
-            {initPoint ?
-                
+            {initPoint ?                
                 <Button
                     href={initPoint}
                     target="_blank"
@@ -48,8 +47,7 @@ const MercadoPago = ({ cartItems, setInitPoint, initPoint }) => {
                     className={classes.buttonOne}
                 >
                     Go To MercadoPago
-                </Button>
-                
+                </Button>                
                 :
                 <Button onClick={onToken} className={classes.buttonTwo}> Pay With MercadoPago </Button>                
             }

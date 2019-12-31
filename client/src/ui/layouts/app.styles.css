@@ -5,6 +5,11 @@
   /* font-family: 'Roboto'; */
 }
 
+.app{
+  width: 100vw;
+  height: 100vh; 
+  background-color: #ffffff;
+}
 /*Clase que evita que en el menu-phone no sea con scroll*/
 .app-overflow{
   width: 100vw;

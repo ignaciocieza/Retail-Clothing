@@ -28,7 +28,6 @@ const MercadoPago = ({ cartItems, setInitPoint, initPoint }) => {
             data: {
                 items: arrayCartItemsModif
             },
-            withCredentials: true,
         }).then(response => {
             setInitPoint(response.data);
         }).catch(error => {

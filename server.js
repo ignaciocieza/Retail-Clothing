@@ -33,7 +33,7 @@ app.get('/service-worker.js', (req, res) => {
     res.send(path.resolve(__dirname, '..', 'build', 'service-worker.js'));
 });
 
-//despues de que el codigo corra, lo pongo a escuchar en el puerto 3000.
+//despues de que el codigo corra, lo pongo a escuchar en el puerto 5000.
 app.listen(port, error => {
     if (error) throw error;
     console.log('server running on port:' + port);
@@ -47,7 +47,7 @@ app.listen(port, error => {
 * "res" -> lo que va a devolver el servidor
 **/
 app.post('/payment', (req, res) => {
-
+    console.log("entro en payment");
     const body = {
         source: req.body.token.id,
         amount: req.body.amount,
@@ -66,7 +66,8 @@ app.post('/payment', (req, res) => {
 app.post('/mercadopago', (req, res) => {
     console.log("entro en mercadopago");
     mercadopago.configure({
-        access_token: process.env.MERCADOPAGO_SECRET_KEY,
+        //access_token: process.env.MERCADOPAGO_SECRET_KEY,
+        access_token:"TEST-13569648033828-121720-f8d32108382688eda400caa858b6e723-7897521"
     })
 
     mercadopago.preferences.create(req.body)

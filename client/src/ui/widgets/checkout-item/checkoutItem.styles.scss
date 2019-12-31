@@ -1,9 +1,13 @@
 .checkout-item {
-    min-width: 80vw;
+    width: 80vw;
     display: flex;
     border-bottom: .1rem solid darkgray;
     padding: 1%;
     align-items: center;
+
+    @media (max-width: 960px) {
+      width: 93vw;
+    }
   
     .image-container {  
         max-width: 0%;

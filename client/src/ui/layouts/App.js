@@ -20,7 +20,7 @@ const App = ({ checkUserSession, hidden }) => {
     }, [checkUserSession]);
 
     return (
-        <div className={hidden ? '' : 'app-overflow'}>
+        <div className={hidden ? 'app' : 'app-overflow'}>
             <Header />
             <SettingBar/>           
             <Main />

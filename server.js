@@ -59,14 +59,13 @@ app.post('/payment', (req, res) => {
         } else {
             res.status(200).send({ success: stripeRes })
         }
-    })
+    });
 });
 
 app.post('/mercadopago', (req, res) => {
     mercadopago.configure({
-        //access_token: process.env.MERCADOPAGO_SECRET_KEY,
-        access_token:"TEST-13569648033828-121720-f8d32108382688eda400caa858b6e723-7897521"
-    })
+        access_token: process.env.MERCADOPAGO_SECRET_KEY,
+    });
 
     mercadopago.preferences.create(req.body)
         .then(function (response) {
@@ -76,4 +75,4 @@ app.post('/mercadopago', (req, res) => {
         }).catch(function (error) {
             console.log(error);
         });
-})
+});

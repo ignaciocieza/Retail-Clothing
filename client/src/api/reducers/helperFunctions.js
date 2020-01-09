@@ -99,6 +99,11 @@ export const selectCartItemsCount = createSelector(
 export const selectCartInitPoint= createSelector(
     [selectCart],
     (cart)=>cart.initPoint
+);
+
+export const selectItemDetail= createSelector(
+    [selectCart],
+    (cart)=>cart.detailItem
 )
 
 export const selectShowText = createSelector(

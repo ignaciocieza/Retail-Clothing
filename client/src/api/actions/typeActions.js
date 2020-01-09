@@ -23,3 +23,4 @@ export const SET_CART_FROM_FIREBASE = 'SET_CART_FROM_FIREBASE';
 export const SEARCH_VALUE= 'SEARCH_VALUE';
 export const SHOW_TEXT= 'SHOW_TEXT';
 export const INIT_POINT='INIT_POINT';
+export const SET_DETAIL_ITEM= 'SET_DETAIL_ITEM';

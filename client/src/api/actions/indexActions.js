@@ -23,7 +23,8 @@ import {
     SET_CART_FROM_FIREBASE,
     SEARCH_VALUE,
     SHOW_TEXT,
-    INIT_POINT
+    INIT_POINT,
+    SET_DETAIL_ITEM
     // UPDATE_CART_IN_FIREBASE
 } from './typeActions';
 import {
@@ -141,10 +142,16 @@ export const setCartFromFirebase = cartItems => ({
     payload: cartItems
 });
 
+export const setDetailItem= item =>({
+    type: SET_DETAIL_ITEM,
+    payload: item
+});
+
+//initPoint: Mercado Pago 
 export const setInitPoint = (initPoint) =>({
     type: INIT_POINT,
     payload:initPoint
-})
+});
 
 export const fetchCollectionsSuccess = collectionsMap => ({
     type: FETCH_COLLECTIONS_SUCCESS,
@@ -303,7 +310,7 @@ export function* updateCartInFirebase() {
 }
 
 //Nota: el prefijo "on", 
-//indica que son las primeras funciones de saga que van a desencadenar otras funciones de saga
+//indica que son las primeras funciones de saga y que van a desencadenar otras funciones de saga
 export function* onEmailSignInStart() {
     yield takeLatest(
         EMAIL_SIGN_IN_START,

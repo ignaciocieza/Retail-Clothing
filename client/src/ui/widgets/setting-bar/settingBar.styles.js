@@ -18,7 +18,6 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'flex-end',
         [theme.breakpoints.down('md')]: {
             clipPath: 'polygon(6% 0, 100% 0, 100% 100%, 0 100%, 0 100%);',
-            //height: '4.5vh',
             height:`calc(${theme.height}px * 0.05)`,
         },
         alignItems: 'center',

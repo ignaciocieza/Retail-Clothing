@@ -20,6 +20,7 @@ const CollectionOverviewContainer = lazy(() => import('../paginas/collections-ov
 const CollectionContainer = lazy(() => import('../paginas/collection/CollectionContainer'));
 const MenuPhone = lazy(() => import('../paginas/menu-phone/MenuPhone'));
 const SearchPage = lazy(() => import('../paginas/search-page/SearchPage'));
+const DetailsPage = lazy(() => import('../paginas/details-page/DetailsPage'));
 //
 
 const Main = ({ fetchCollectionsStart, currentUser }) => {
@@ -40,6 +41,7 @@ const Main = ({ fetchCollectionsStart, currentUser }) => {
             <Route path={`/shop/:collectionId`} component={CollectionContainer} />
             <Route exact path='/checkout' component={CheckOut} />
             <Route exact path='/menu' component={MenuPhone} />
+            <Route exact path='/details' component={DetailsPage} />
             <Route exact path='/signin' render={() => {
               return (
                 currentUser ?

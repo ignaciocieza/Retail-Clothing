@@ -13,7 +13,7 @@ React React-Router Redux Redux-Saga React-Lazy React-Profile React-Hook Progresi
 
 ## Servidor: Heroku
 
-## Plataforma de Pago: Stripe Mercado Pago
+## Plataforma de Pago: Stripe Mercado Pago (node.js)
 
 ## Capturas:
 

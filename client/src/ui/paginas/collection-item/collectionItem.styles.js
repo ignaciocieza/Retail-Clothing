@@ -51,6 +51,7 @@ bubleText: {
 textTitle: {
     fontSize: "1.2rem",
     marginTop: "5%",
+    cursor:"pointer",
     [theme.breakpoints.down('md')]: {
         fontSize: "1rem",
     },

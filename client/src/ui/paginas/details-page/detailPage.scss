@@ -9,6 +9,10 @@
 //Override de existing react-galery class:
 .image-gallery {
     width: 69vw;
+
+    @media (max-width: 960px) {
+        width: 83vw;
+    }
 }
 
 .image-gallery-slide .image-gallery-image {
@@ -23,13 +27,14 @@
     right: 16%;
     font-Size: 228%;
     color: #cbaaa0;
-    // [theme.breakpoints.down('md')]: {
-    //     left: "9%",
-    // },
     cursor: pointer;
 
     &:active {
         transform: matrix(0.60,0.80,-0.80,0.60,0,0);
+    }
+
+    @media (max-width: 960px) {
+        right: 11%;
     }
 }
 .textPrice{
@@ -44,6 +49,11 @@
 }
 .detailText {
     font-size: 1rem;
+
+    @media (max-width: 960px) {
+        text-align: center;
+        margin: 1%;
+    }
 }
 .bar {
     width: 76%;
@@ -60,6 +70,11 @@
     justify-content: space-between;
     width: 56vw;
     margin-bottom: 1%;
+
+    @media (max-width: 960px) {
+        width: 71vw;
+        margin: 2%;
+    }
 }
 .boxSize{
     display: none;

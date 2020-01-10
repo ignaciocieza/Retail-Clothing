@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
             width: '12%',
             //height: '6%',
             height: `calc(${theme.height}px * 0.06)`,
-            zIndex:2,
+            zIndex:6,
         },
     },
     bubleCart: {

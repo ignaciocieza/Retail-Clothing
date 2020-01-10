@@ -9,9 +9,9 @@ if (process.env.NODE_ENV !== 'production') require('dotenv').config(); //accede 
 //requerir de la biblioteca 'stripe' y luego invocar el proceso de obtencion de la clave (se le fijo la ruta en "require('dotenv').config();"). 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const mercadopago = require('mercadopago');
-mercadopago.configure({
-    access_token: process.env.MERCADOPAGO_SECRET_KEY,
-});
+// mercadopago.configure({
+//     access_token: process.env.MERCADOPAGO_SECRET_KEY,
+// });
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -58,7 +58,7 @@ app.post('/payment', (req, res) => {
 
     stripe.charges.create(body, (stripeErr, stripeRes) => {
         if (stripeErr) {
-            res.status(500).send({ error: stripeErr }) //500-> error en stripe
+            res.status(500).send({ error: stripeErr }) 
         } else {
             res.status(200).send({ success: stripeRes })
         }
@@ -66,10 +66,9 @@ app.post('/payment', (req, res) => {
 });
 
 app.post('/mercadopago', (req, res) => {
-    // mercadopago.configure({
-    //     //access_token: process.env.MERCADOPAGO_SECRET_KEY,
-    //     access_token: "TEST-13569648033828-121720-f8d32108382688eda400caa858b6e723-7897521"
-    // });
+    mercadopago.configure({
+        access_token: "TEST-13569648033828-121720-f8d32108382688eda400caa858b6e723-7897521"
+    });
 
     mercadopago.preferences.create(req.body)
         .then(function (response) {

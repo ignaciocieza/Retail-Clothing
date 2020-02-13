@@ -12,7 +12,7 @@ Comandos:
 
 1)copiar package.json
 
-2)npm i -g nodemon //--> instala a nivel global (en la pc)
+2)npm i -g nodemon //--> se debe instalar a nivel global (en la pc)
 
 3)yarn
 

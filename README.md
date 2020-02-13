@@ -23,3 +23,5 @@ React React-Router Redux Redux-Saga React-Lazy React-Profile React-Hook Progresi
 ![](/capturas/shop-search.png)
 ![](/capturas/shop-women.png)
 ![](/capturas/signin.png)
+![](/capturas/item-detail.png)
+![](/capturas/stripe-mp.png)

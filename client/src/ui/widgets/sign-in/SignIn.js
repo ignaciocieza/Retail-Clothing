@@ -11,14 +11,12 @@ const SignIn = ({ emailSignInStart, googleSignInStart }) => {
     const { email, password } = userCredentials;
 
     const handleSubmit = async event => {
-        event.preventDefault();       
-
+        event.preventDefault();     
         emailSignInStart({ email, password });
     };
 
     const handleChange = event => {
         const { value, name } = event.target;
-
         setCredentials({ ...userCredentials, [name]: value });
     };
 

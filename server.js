@@ -9,9 +9,9 @@ if (process.env.NODE_ENV !== 'production') require('dotenv').config(); //accede 
 //requerir de la biblioteca 'stripe' y luego invocar el proceso de obtencion de la clave (se le fijo la ruta en "require('dotenv').config();"). 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const mercadopago = require('mercadopago');
-mercadopago.configure({
-     access_token: process.env.MERCADOPAGO_SECRET_KEY,
- });
+// mercadopago.configure({
+//     access_token: process.env.MERCADOPAGO_SECRET_KEY,
+// });
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -66,6 +66,7 @@ app.post('/payment', (req, res) => {
 });
 
 app.post('/mercadopago', (req, res) => {
+    
 
     mercadopago.preferences.create(req.body)
         .then(function (response) {

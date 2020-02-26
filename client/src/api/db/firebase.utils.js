@@ -2,6 +2,9 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
+/**
+ * Integracion firebase sdk
+ */
 const config = {
     apiKey: "AIzaSyDW8xOHjSoVvSd_FI5TG5wATzzyFMWr3dc",
     authDomain: "e-commerce-db-78910.firebaseapp.com",
@@ -83,7 +86,7 @@ export const convertCollectionsSnapshotToMap = (collections) => {
 export const getCurrentUser = () => {
     return new Promise((resolve, reject) => {
         const unSubscribe = auth.onAuthStateChanged(userAuth => {
-            unSubscribe(); ///?????
+            unSubscribe(); ///ejecuta la funcion
             resolve(userAuth);
         }, reject)
     })
